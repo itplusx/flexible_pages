@@ -4,7 +4,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'Flexible Pages',
     'description' => 'Supports the setup and management of custom page types.',
     'category' => 'be',
-    'version' => '1.0.0',
+    'version' => '2.0.0',
     'state' => 'stable',
     'author' => 'ITplusX',
     'author_email' => 'mail@itplusx.de',
@@ -12,12 +12,12 @@ $EM_CONF[$_EXTKEY] = [
     'clearCacheOnLoad' => 1,
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-9.5.99',
-            'fluid_styled_content' => '9.5.0-9.5.99'
+            'typo3' => '10.0.0-10.4.99',
+            'fluid_styled_content' => '10.0.0-10.4.99'
         ],
         'conflicts' => [],
         'suggests' => [
-            'headless' => '1.0.0-1.0.99'
+            'headless' => '2.0.0-2.0.99'
         ],
     ],
     'autoload' => [

@@ -15,6 +15,7 @@ namespace ITplusX\FlexiblePages\ViewHelpers\Be;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
@@ -151,10 +152,10 @@ class PageInfosViewHelper extends AbstractBackendViewHelper
                     // Setting icon with context menu + uid
                     if ($showTitle) {
                         if ($linkTitle) {
-                            $pageRecord['title'] = '<a href="' . BackendUtility::getModuleUrl(
-                                $linkModule,
-                                ['id' => $id]
-                                ) . '">' . $pageRecord['title'] . '</a>';
+                            $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+                            $uri = $uriBuilder->buildUriFromRoute($linkModule, ['id' => $id]);
+
+                            $pageRecord['title'] = '<a href="' . $uri . '">' . $pageRecord['title'] . '</a>';
                         }
                         $icon .= ' <em>' . $pageRecord['title'] . '</em>';
                     } else {

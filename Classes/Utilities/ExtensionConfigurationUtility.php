@@ -10,8 +10,8 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 class ExtensionConfigurationUtility
 {
     const EXTKEY = 'flexible_pages';
+    const CACHE_IDENTIFIER = self::EXTKEY;
     const CACHE_ENTRY_IDENTIFIER = 'pageType-configuration';
-    const CACHE_IDENTIFIER = 'cache_' . self::EXTKEY;
 
     /**
      * Get the merged extension configuration from $GLOBALS['TYPO3_CONF_VARS']['EXT'] and TsConfig

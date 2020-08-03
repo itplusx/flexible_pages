@@ -6,7 +6,7 @@ use ITplusX\FlexiblePages\Utilities\ExtensionConfigurationUtility;
 use ITplusX\FlexiblePages\Utilities\TcaUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Page\PageRepository;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 
 /**
  * Userfunc to render alternative label for media elements

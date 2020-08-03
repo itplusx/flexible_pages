@@ -14,4 +14,3 @@ if(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('headless')) {
         'Flexible Pages Headless'
     );
 }
-
