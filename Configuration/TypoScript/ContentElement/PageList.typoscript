@@ -1,0 +1,96 @@
+tt_content.tx_flexiblepages_pagelist =< lib.contentElement
+tt_content.tx_flexiblepages_pagelist {
+    templateName = TEXT
+    templateName {
+        data = flexform:pi_flexform:template
+        ifEmpty = Default
+    }
+
+    # TODO: Change Frontend-Editing icons
+    stdWrap {
+        editIcons = tt_content: header [header_layout], bodytext [bullets_type]
+        editIcons {
+            beforeLastTag = 1
+            iconTitle.data = LLL:EXT:fluid_styled_content/Resources/Private/Language/FrontendEditing.xlf:editIcon.bullets
+        }
+    }
+
+    dataProcessing {
+        10 = ITplusX\FlexiblePages\DataProcessing\FlexFormProcessor
+
+        20 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        20 {
+            if {
+                isTrue.field = pages
+                isTrue {
+                    if.isTrue.data = flexform:pi_flexform:doktypes
+                }
+            }
+
+            table = pages
+            pidInList.field = pages
+            recursive.field = recursive
+
+            // Add isCurrent and isActive state to pages
+            selectFields (
+              *,
+              IF(pages.uid={field:pid}, 1, 0) AS isCurrent
+            )
+            selectFields.insertData = 1
+
+            selectFields.append = HMENU
+            selectFields.append {
+              wrap = ,IF(pages.uid IN(|), 1, 0) AS isActive
+
+              special = rootline
+              special.range = 0|-1
+
+              1 = TMENU
+              1.NO {
+                wrapItemAndSub = {field:uid}, |*| {field:uid}, |*| {field:uid}
+                wrapItemAndSub.insertData = 1
+                doNotLinkIt = 1
+                doNotShowLink = 1
+              }
+            }
+
+            languageField = sys_language_uid
+            where = doktype IN ({flexform:pi_flexform:doktypes}) AND nav_hide = 0
+            where.insertData = 1
+            orderBy {
+              data = flexform:pi_flexform:orderBy
+              ifEmpty = sorting ASC
+            }
+            # TODO: Add groupBy
+            # groupBy =
+            max.data = flexform:pi_flexform:limit
+            begin.data = flexform:pi_flexform:offset
+
+            as = pages
+
+            dataProcessing {
+                20 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+                20 {
+                    if.isTrue.field = media
+
+                    references.fieldName = media
+                    as = media
+                }
+                30 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+                30 {
+                    if.isTrue.field = categories
+
+                    table = sys_category
+                    pidInList.data = leveluid:0
+                    recursive = 99
+                    leftjoin = sys_category_record_mm ON sys_category_record_mm.uid_local = sys_category.uid
+                    where.wrap = sys_category_record_mm.uid_foreign = |
+                    where.field = uid
+                    begin = 0
+                    as = categories
+                }
+            }
+        }
+
+    }
+}

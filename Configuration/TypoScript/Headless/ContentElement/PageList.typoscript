@@ -1,0 +1,105 @@
+tt_content.tx_flexiblepages_pagelist >
+tt_content.tx_flexiblepages_pagelist =< lib.contentElementWithHeader
+tt_content.tx_flexiblepages_pagelist {
+    fields {
+        content {
+            fields {
+                template = TEXT
+                template.data = flexform:pi_flexform:template
+
+                types = TEXT
+                types {
+                    data = flexform:pi_flexform:doktypes
+                    split {
+                        token = ,
+                        cObjNum = 1 |*| 2 |*| 3
+
+                        1 {
+                            current = 1
+                            wrap = |,
+
+                            cObject =< lib.doktypeName
+                            cObject.key.override.data = current
+                        }
+
+                        2 < .1
+
+                        3 < .1
+                        3.wrap = |
+                    }
+                }
+
+                pages = COA
+                pages {
+                    stdWrap.innerWrap = [|]
+                    10 = CONTENT
+                    10 {
+                        table = pages
+                        select {
+                            pidInList.field = pages
+                            recursive.field = recursive
+
+                            // Add isCurrent and isActive state to pages
+                            selectFields (
+                              *,
+                              IF(pages.uid={field:pid}, 1, 0) AS isCurrent
+                            )
+                            selectFields.insertData = 1
+
+                            selectFields.append = HMENU
+                            selectFields.append {
+                                wrap = ,IF(pages.uid IN(|), 1, 0) AS isActive
+
+                                special = rootline
+                                special.range = 0|-1
+
+                                1 = TMENU
+                                1.NO {
+                                    wrapItemAndSub = {field:uid}, |*| {field:uid}, |*| {field:uid}
+                                    wrapItemAndSub.insertData = 1
+                                    doNotLinkIt = 1
+                                    doNotShowLink = 1
+                                }
+                            }
+
+                            languageField = sys_language_uid
+                            where = doktype IN ({flexform:pi_flexform:doktypes}) AND nav_hide = 0
+                            where.insertData = 1
+                            orderBy {
+                                data = flexform:pi_flexform:orderBy
+                                ifEmpty = sorting ASC
+                            }
+                            # TODO: Add groupBy
+                            # groupBy =
+                            max.data = flexform:pi_flexform:limit
+                            begin.data = flexform:pi_flexform:offset
+                        }
+
+                        renderObj =< lib.page
+                        renderObj.fields {
+                            isActive = TEXT
+                            isActive.field = isActive
+
+                            isCurrent = TEXT
+                            isCurrent.field = isCurrent
+                        }
+                        renderObj.stdWrap.wrap = |###BREAK###
+                    }
+
+                    stdWrap.split {
+                        token = ###BREAK###
+                        cObjNum = 1 |*|2|*| 3
+                        1.current = 1
+                        1.stdWrap.wrap = |
+
+                        2.current = 1
+                        2.stdWrap.wrap = ,|
+
+                        3.current = 1
+                        3.stdWrap.wrap = |
+                    }
+                }
+            }
+        }
+    }
+}

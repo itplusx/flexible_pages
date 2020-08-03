@@ -1,0 +1,28 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="Default" />
+
+<f:section name="Main">
+    <f:if condition="{pages}">
+        <f:then>
+            <ul class="PageList">
+                <f:for each="{pages}" as="page">
+                  <li class="PageList-item">
+                    <f:render
+                      partial="Header/Header"
+                      arguments="{
+                        header: page.data.title,
+                        layout: data.pi_flexform.headerLayout,
+                        default: '{settings.defaultHeaderType + 1}',
+                        link: '{page.data.uid}{f:if(condition: page.data.target, then: \' {page.data.target}\')}'
+                      }"
+                    />
+                  </li>
+                </f:for>
+            </ul>
+        </f:then>
+        <f:else>
+            <f:translate key="noPagesFound" extensionName="flexible_pages" />
+        </f:else>
+    </f:if>
+</f:section>
+</html>

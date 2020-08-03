@@ -1,0 +1,2 @@
+# cat=Basic; type=string; label=Path where additional yaml configurations are located.
+additionalYamlConfigPath =

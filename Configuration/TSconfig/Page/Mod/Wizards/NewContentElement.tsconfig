@@ -1,0 +1,13 @@
+mod.wizards.newContentElement.wizardItems {
+    special.elements {
+        tx_flexiblepages_pagelist {
+            iconIdentifier = tx-flexiblepages-pagelist
+            title = LLL:EXT:flexible_pages/Resources/Private/Language/locallang_db.xlf:CType.tx_flexiblepages_pagelist.title
+            description = LLL:EXT:flexible_pages/Resources/Private/Language/locallang_db.xlf:CType.tx_flexiblepages_pagelist.description
+            tt_content_defValues {
+                CType = tx_flexiblepages_pagelist
+            }
+        }
+    }
+    special.show := addToList(tx_flexiblepages_pagelist)
+}

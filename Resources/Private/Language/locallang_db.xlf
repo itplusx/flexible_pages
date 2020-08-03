@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+	<file t3:id="1517337922" source-language="en" datatype="plaintext" original="messages" date="2018-01-30T18:45:22Z" product-name="flexible_pages">
+		<header/>
+		<body>
+			<trans-unit id="CType.tx_flexiblepages_pagelist.title">
+				<source>Pages of selected doktypes</source>
+			</trans-unit>
+			<trans-unit id="CType.tx_flexiblepages_pagelist.description">
+				<source>Display a list of custom page types generated with flexible_pages</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,75 @@
+{
+  "name": "itplusx/flexible-pages",
+  "type": "typo3-cms-extension",
+  "description": "Supports the setup and management of custom page types.",
+  "keywords": [
+    "TYPO3",
+    "TYPO3 CMS",
+    "extension",
+    "pages",
+    "page based content"
+  ],
+  "homepage": "https://itplusx.de",
+  "support": {
+    "issues": "https://itplusx.de"
+  },
+  "authors": [
+    {
+      "name": "Vaclav Janoch",
+      "email": "janoch@itplusx.de",
+      "role": "Developer",
+      "homepage": "https://itplusx.de"
+    },
+    {
+      "name": "Ramón Schlosser",
+      "email": "schlosser@itplusx.de",
+      "role": "Developer",
+      "homepage": "https://itplusx.de"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.2",
+    "typo3/cms-core": "^9.5",
+    "typo3/cms-fluid-styled-content": "^9.5",
+    "symfony/finder": "^4.3",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "namelesscoder/typo3-repository-client": "^1.2",
+    "nimut/testing-framework": "^1.0",
+    "mikey179/vfsStream": "^1.4",
+    "phpunit/phpunit": "^4.7 || ^5.0"
+  },
+  "suggest":{
+    "friendsoftypo3/headless": "Allows headless (json) output of flexible_pages content elements"
+  },
+  "autoload": {
+    "psr-4": {
+      "ITplusX\\FlexiblePages\\": "Classes"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ITplusX\\FlexiblePages\\Tests\\": "Tests"
+    }
+  },
+  "replace": {
+    "flexible_pages": "self.version",
+    "typo3-ter/flexible-pages": "self.version"
+  },
+  "config": {
+    "vendor-dir": ".Build/vendor",
+    "bin-dir": ".Build/bin"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    },
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web",
+      "extension-key": "flexible_pages"
+    }
+  }
+}

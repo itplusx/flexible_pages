@@ -1,0 +1,172 @@
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_sheet.general</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <doktypes>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.doktypes</label>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>ITplusX\FlexiblePages\Hooks\ItemsProcFunc->user_doktypes</itemsProcFunc>
+                                <renderType>selectCheckBox</renderType>
+                                <minitems>1</minitems>
+                            </config>
+                        </TCEforms>
+                    </doktypes>
+                    <orderBy>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy</label>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>ITplusX\FlexiblePages\Hooks\ItemsProcFunc->user_orderBy</itemsProcFunc>
+                                <renderType>selectMultipleSideBySide</renderType>
+                                <enableMultiSelectFilterTextfield>true</enableMultiSelectFilterTextfield>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.tstampAsc</numIndex>
+                                        <numIndex index="1">tstamp ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.tstampDesc</numIndex>
+                                        <numIndex index="1">tstamp DESC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.starttimeAsc</numIndex>
+                                        <numIndex index="1">starttime ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.starttimeDesc</numIndex>
+                                        <numIndex index="1">starttime DESC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.endtimeAsc</numIndex>
+                                        <numIndex index="1">endtime ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.endtimeDesc</numIndex>
+                                        <numIndex index="1">endtime DESC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="6">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.crdateAsc</numIndex>
+                                        <numIndex index="1">crdate ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="7">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.crdateDesc</numIndex>
+                                        <numIndex index="1">crdate DESC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="8">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.titleAsc</numIndex>
+                                        <numIndex index="1">title ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="9">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.titleDesc</numIndex>
+                                        <numIndex index="1">title DESC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="10">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.lastUpdatedAsc</numIndex>
+                                        <numIndex index="1">lastUpdated ASC</numIndex>
+                                    </numIndex>
+                                    <numIndex index="11">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy.lastUpdatedDesc</numIndex>
+                                        <numIndex index="1">lastUpdated DESC</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </orderBy>
+                </el>
+            </ROOT>
+        </sDEF>
+        <additional>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_sheet.additional</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <template>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.template</label>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>ITplusX\FlexiblePages\Hooks\ItemsProcFunc->user_template</itemsProcFunc>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.template.default</numIndex>
+                                        <numIndex index="1">Default</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </template>
+                    <headerLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.headerLayout</label>
+                            <description>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.headerLayout.description</description>
+                            <config>
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value</numIndex>
+                                        <numIndex index="1">0</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.1</numIndex>
+                                        <numIndex index="1">1</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.2</numIndex>
+                                        <numIndex index="1">2</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.3</numIndex>
+                                        <numIndex index="1">3</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4" type="array">
+                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.4</numIndex>
+                                        <numIndex index="1">4</numIndex>
+                                    </numIndex>
+                                    <numIndex index="5" type="array">
+                                        <numIndex index="0">LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.5</numIndex>
+                                        <numIndex index="1">5</numIndex>
+                                    </numIndex>
+                                </items>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </headerLayout>
+                    <offset>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.offset</label>
+                            <config>
+                                <type>input</type>
+                                <size>5</size>
+                                <eval>num</eval>
+                            </config>
+                        </TCEforms>
+                    </offset>
+                    <limit>
+                        <TCEforms>
+                            <label>LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.limit</label>
+                            <config>
+                                <type>input</type>
+                                <size>5</size>
+                                <eval>num</eval>
+                            </config>
+                        </TCEforms>
+                    </limit>
+                </el>
+            </ROOT>
+        </additional>
+    </sheets>
+</T3DataStructure>

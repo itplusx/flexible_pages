@@ -1,0 +1,2 @@
+# Content elements
+@import 'EXT:flexible_pages/Configuration/TypoScript/Headless/ContentElement/PageList.typoscript'

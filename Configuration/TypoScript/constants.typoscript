@@ -1,0 +1,8 @@
+plugin.tx_flexiblepages {
+    # cat=flexible_pages/a1; type=string; label= Path of Fluid Templates for all defined content elements
+    templateRootPath =
+    # cat=flexible_pages/templates/a2; type=string; label= Path of Fluid Partials for all defined content elements
+    partialRootPath =
+    # cat=flexible_pages/templates/a3; type=string; label= Path of Fluid Layouts for all defined content elements
+    layoutRootPath =
+}

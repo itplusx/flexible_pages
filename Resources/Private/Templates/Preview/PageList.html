@@ -1,0 +1,105 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:fxp="http://typo3.org/ns/ITplusX/FlexiblePages/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<br>
+<table class="table table-condensed table-hover">
+    <thead>
+        <th colspan="2">
+            <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_db.xlf:CType.tx_flexiblepages_pagelist.title"/>
+        </th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <strong>
+                    <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.template"/>
+                </strong>
+            </td>
+            <td>{pi_flexform_transformed.template}</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.headerLayout"/>
+                </strong>
+            </td>
+            <td>
+              <f:if condition="{pi_flexform_transformed.headerLayout}">
+                <f:then>
+                  <f:translate key="LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:header_layout.I.{pi_flexform_transformed.headerLayout}"/>
+                </f:then>
+                <f:else>
+                  <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.default_value"/>
+                </f:else>
+              </f:if>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.doktypes"/>
+                </strong>
+            </td>
+            <td>{pi_flexform_transformed.doktypes}</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    <f:translate key="LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.startingpoint"/>
+                </strong>
+            </td>
+            <td>
+                <fxp:be.pageInfos pageUids="{pages}" showTitle="true" linkTitle="true" infoDelimiter="<br>" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>
+                    <f:translate key="LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.recursive"/>
+                </strong>
+            </td>
+            <td>
+                {recursive}
+            </td>
+        </tr>
+        <f:if condition="{pi_flexform_transformed.orderBy}">
+            <tr>
+                <td>
+                    <strong>
+                        <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.orderBy" />
+                    </strong>
+                </td>
+                <td>
+                    {pi_flexform_transformed.orderBy}
+                </td>
+            </tr>
+        </f:if>
+        <f:if condition="{pi_flexform_transformed.offset}">
+            <tr>
+                <td>
+                    <strong>
+                        <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.offset"/>
+                    </strong>
+                </td>
+                <td>
+                    {pi_flexform_transformed.offset}
+                </td>
+            </tr>
+        </f:if>
+        <f:if condition="{pi_flexform_transformed.limit}">
+            <tr>
+                <td>
+                    <strong>
+                        <f:translate key="LLL:EXT:flexible_pages/Resources/Private/Language/locallang_be.xlf:flexforms_element.limit"/>
+                    </strong>
+                </td>
+                <td>
+                    {pi_flexform_transformed.limit}
+                </td>
+            </tr>
+        </f:if>
+    </tbody>
+</table>
+
+</html>

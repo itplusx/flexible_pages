@@ -1,0 +1,9 @@
+mod {
+    web_layout {
+        tt_content {
+            preview {
+                tx_flexiblepages_pagelist = EXT:flexible_pages/Resources/Private/Templates/Preview/PageList.html
+            }
+        }
+    }
+}

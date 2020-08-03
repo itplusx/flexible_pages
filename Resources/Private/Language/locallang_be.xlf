@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+	<file t3:id="1517337922" source-language="en" datatype="plaintext" original="messages" date="2018-01-30T18:45:22Z" product-name="flexible_pages">
+		<header/>
+		<body>
+			<trans-unit id="flexforms_sheet.general">
+				<source>General</source>
+			</trans-unit>
+			<trans-unit id="flexforms_sheet.additional">
+				<source>Additional</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.doktypes">
+				<source>Doktypes</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy">
+				<source>Sort By</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.tstampAsc">
+				<source>Last edited ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.tstampDesc">
+				<source>Last edited ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.starttimeAsc">
+				<source>Publish Date ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.starttimeDesc">
+				<source>Publish Date ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.endtimeAsc">
+				<source>Expiration Date ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.endtimeDesc">
+				<source>Expiration Date ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.crdateAsc">
+				<source>Creation Date ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.crdateDesc">
+				<source>Creation Date ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.titleAsc">
+				<source>Title ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.titleDesc">
+				<source>Title ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.lastUpdatedAsc">
+				<source>Last Updated ⬆</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.orderBy.lastUpdatedDesc">
+				<source>Last Updated ⬇</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.offset">
+				<source>Starting with given record</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.limit">
+				<source>Max records displayed</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.template">
+				<source>Template</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.template.default">
+				<source>Default</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.headerLayout">
+				<source>Header Layout</source>
+			</trans-unit>
+			<trans-unit id="flexforms_element.headerLayout.description">
+				<source>The layout of the headline for each element in the list. (h1/h2/...)</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

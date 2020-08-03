@@ -1,0 +1,17 @@
+lib.contentElement {
+    templateRootPaths {
+        30 = EXT:flexible_pages/Resources/Private/Templates/PageList
+        31 = {$plugin.tx_flexiblepages.templateRootPath}
+    }
+    partialRootPaths {
+        30 = EXT:flexible_pages/Resources/Private/Partials/PageList
+        31 = {$plugin.tx_flexiblepages.partialRootPath}
+    }
+    layoutRootPaths {
+        30 = EXT:flexible_pages/Resources/Private/Layouts/PageList
+        31 = {$plugin.tx_flexiblepages.layoutRootPath}
+    }
+}
+
+# Content elements
+@import 'EXT:flexible_pages/Configuration/TypoScript/ContentElement/PageList.typoscript'
