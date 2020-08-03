@@ -55,7 +55,7 @@
     }
   },
   "replace": {
-    "flexible_pages": "self.version",
+    "itplusx/flexible_pages": "self.version",
     "typo3-ter/flexible-pages": "self.version"
   },
   "config": {
