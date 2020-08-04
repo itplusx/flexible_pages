@@ -47,28 +47,27 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = $cachedPageTypesConfiguration;
         } else {
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
-            $activeExtensionsList = implode(',', ExtensionManagementUtility::getLoadedExtensionListArray());
 
-            /** @var PageTypesRegistration $pageTypesRegistration */
-            $pageTypesRegistration = GeneralUtility::makeInstance(
-                PageTypesRegistration::class,
-                [
-                    // Global configuration path
-                    Environment::getConfigPath() . '/' . ExtensionConfigurationUtility::EXTKEY,
+            $configPaths = [];
 
-                    // Configuration path in every active extension (use glob pattern)
-                    Environment::getPublicPath() . '/typo3conf/ext/{'. $activeExtensionsList .'}/Configuration/Yaml/' . ExtensionConfigurationUtility::EXTKEY,
+            // Global configuration path
+            $configPaths[] = Environment::getConfigPath() . '/' . ExtensionConfigurationUtility::EXTKEY;
 
-                    // Custom configuration path from extension configuration
-                    GeneralUtility::getFileAbsFileName(
-                        (string)$extensionConfiguration->get(
-                            ExtensionConfigurationUtility::EXTKEY,
-                            'additionalYamlConfigPath'
-                        )
-                    )
-                ]
+            // Configuration path in every active extension
+            foreach (ExtensionManagementUtility::getLoadedExtensionListArray() as $activeExtension) {
+                $configPaths[] = Environment::getPublicPath() . '/typo3conf/ext/' . $activeExtension . '/Configuration/Yaml/' . ExtensionConfigurationUtility::EXTKEY;
+            }
+
+            // Custom configuration path from extension configuration
+            $configPaths[] = GeneralUtility::getFileAbsFileName(
+                (string)$extensionConfiguration->get(
+                    ExtensionConfigurationUtility::EXTKEY,
+                    'additionalYamlConfigPath'
+                )
             );
 
+            /** @var PageTypesRegistration $pageTypesRegistration */
+            $pageTypesRegistration = GeneralUtility::makeInstance(PageTypesRegistration::class, $configPaths);
             $pageTypesRegistration->registerPageTypesFromYamlFiles();
         }
 
@@ -157,3 +156,4 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
             ->hasCache(ExtensionConfigurationUtility::CACHE_IDENTIFIER);
     }
 }
+
