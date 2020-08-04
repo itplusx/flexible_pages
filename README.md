@@ -1,5 +1,7 @@
-<p align="center" >
-  ![flexible_pages](Resources/Public/Icons/Logo.png)
+<p align="center">
+  <a href="https://github.com/itplusx/flexible_pages" rel="noopener noreferrer">
+    <img src="https://raw.githubusercontent.com/itplusx/flexible_pages/master/Resources/Public/Icons/Logo.png" alt="TYPO3 EXT:flexible_pages">
+  </a>
 </p>
 
 # TYPO3 Extension `flexible_pages`
