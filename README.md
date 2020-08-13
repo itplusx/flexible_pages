@@ -15,9 +15,8 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 * Features
 * Roadmap
 * Installation
-* Usage
-* Contribution
-* Credits
+* Registering custom pages types
+* Generic frontend list plugin (*tx_flexiblepages_pagelist*)
 
 ## Features
 
