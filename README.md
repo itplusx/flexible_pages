@@ -27,13 +27,13 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 
 ✓ Plugin to render menus / lists of pages by page types
 
-✓ Create an generic icon with the staring letter of the label, if no icons have been registered
-
 
 ## Roadmap
-- Backend module to configure custom pages types. It's basically a configuration 
+- Create an generic icon with the staring letter of the label, if no icons have been registered
+
+- Backend module to configure custom pages types. It's basically a configuration
   front end for the YAML file
-  
+
 - Enable setting custom position in pages select box
 
 - Enable sorting by date
@@ -41,7 +41,7 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 - Cli command to create page types
 
 - BE Module
-  - List 
+  - List
     - List pages with page type filter
     - Bulk edit
   - Configuration
@@ -114,7 +114,7 @@ configuration:
 
 ```
 
-### 2.2 Using ext_localconf.php 
+### 2.2 Using ext_localconf.php
 ```
 \ITplusX\FlexiblePages\Registry\PageTypesRegistration::registerPageType(
     87,
@@ -216,7 +216,7 @@ Finally you can add your custom template file in the previously specified `templ
 - When you chose to extend the templates with a numeric array, your template file has to be named like the value (as upper camelcase; e.g `MyNewTemplate.html`).
 
 ### 3.2 Extending orderBy
-The `orderBy` selection can be extended as well to add custom order fields. For example if you added a new field `type` to your custom pageType you could also order by this field if necessary. 
+The `orderBy` selection can be extended as well to add custom order fields. For example if you added a new field `type` to your custom pageType you could also order by this field if necessary.
 
 For every added custom `orderBy` item an ascending and descending variant is created. Custom order fields can be added either by PageTS or the EXTCONF array.
 
