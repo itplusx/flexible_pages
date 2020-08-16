@@ -30,7 +30,6 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 
 
 ## Roadmap
-
 - Create an generic icon with the staring letter of the label, if no icons have been registered
 - Backend module to configure custom pages types. It's basically a configuration front end for the YAML file
 - Enable setting custom position in pages select box
@@ -259,6 +258,13 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['flexible_pages']['tx_flexiblepages_pagel
     'type' => 'Type'
 ];
 ```
+
+## 4. Working Example
+For a working example please have a look at [EXT:flexible_news](https://github.com/itplusx/flexible_news).
+There you can see how simple it is to:
+
+- Setup a new pageType with special icons and name
+- Extend the template select of the *tx_flexiblepages_pagelist* CE
 
 ---
 
