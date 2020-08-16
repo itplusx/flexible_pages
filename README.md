@@ -4,6 +4,7 @@
   </a>
 </p>
 
+
 # TYPO3 Extension `flexible_pages`
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -15,9 +16,9 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 * Features
 * Roadmap
 * Installation
-* Usage
-* Contribution
-* Credits
+* Registering custom pages types
+* Generic frontend list plugin (*tx_flexiblepages_pagelist*)
+
 
 ## Features
 
@@ -27,33 +28,27 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 
 ✓ Plugin to render menus / lists of pages by page types
 
-✓ Create an generic icon with the staring letter of the label, if no icons have been registered
-
 
 ## Roadmap
-- Backend module to configure custom pages types. It's basically a configuration
-  front end for the YAML file
-
+- Create an generic icon with the staring letter of the label, if no icons have been registered
+- Backend module to configure custom pages types. It's basically a configuration front end for the YAML file
 - Enable setting custom position in pages select box
-
 - Enable sorting by date
-
 - Cli command to create page types
-
 - BE Module
   - List
     - List pages with page type filter
     - Bulk edit
   - Configuration
     - Configure page type in BE
-
 - Provide a nice way to extend custom page types with additional fields
 
 
 ## 1. Installation
 
 ### 1.1 Installation with [`composer`](https://getcomposer.org/)
-`composer require itplusx/flexible_pages`
+`composer require itplusx/flexible-pages`
+
 
 ### 1.2 Installation with the [TYPO3 Extension Manager](https://docs.typo3.org/typo3cms/GettingStartedTutorial/ExtensionManager/Index.html#installing-a-new-extension)
 Use the Extension Key `flexible_pages` in the [TYPO3 Extension Manager](https://docs.typo3.org/typo3cms/GettingStartedTutorial/ExtensionManager/Index.html#installing-a-new-extension).
@@ -64,11 +59,13 @@ There are two ways to register custom pages types.
 1. [Using *YAML* configuration files (recommended)](#21-using-yaml-configuration-files-recommended)
 2. [Using ext_localconf.php](#22-using-ext_localconfphp)
 
+
 ### 2.1 Using *YAML* configuration files (recommended)
 The easiest way to add new page types is via YAML. Three different possibilities exist to add new pageTypes with YAML files:
 1. [Using the global config directory path (like with the site configuration of the TYPO3 core)](#211-using-the-global-config-directory)
 2. [Using the extension Configuration directory path of your custom extension](#212-using-the-extension-configuration-directory)
 3. [Adding a custom path](#213-adding-a-custom-path)
+
 
 #### 2.1.1 Using the global config directory
 As with the site configuration of the TYPO3 core it is also possible to add YAML files inside the global config directory.
@@ -80,6 +77,7 @@ config/
     └── myNewPageType/   --> Identifier of your pageType. Not used by the registering process yet.
         └── config.yaml  --> Required to be named exactly like this.
 ```
+
 
 #### 2.1.2 Using the extension Configuration directory
 It is also possible for every third-party extension to use `flexible_pages` as base for adding custom pageTypes. To enable this just add a YAML configuration file to your own extension inside `Configuration/Yaml/flexible_pages`.
@@ -95,8 +93,10 @@ typo3conf/
                     └── config.yaml  --> Required to be named exactly like this.
 ```
 
+
 #### 2.1.3 Adding a custom path
 Beside the first two pre-defined directory paths it is also possible to define a third custom path where your custom YAML files are stored. For this you could simply add the custom path to the extension configuration in `Admin Tools -> Settings -> Extension Configuration -> flexible_pages` or set `$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['flexible_pages']['additionalYamlConfigPath']` in your `ext_localconf.php`.
+
 
 #### 2.1.4 YAML File Example
 ```
@@ -113,6 +113,7 @@ configuration:
   isDraggableInNewPageDragArea: true
 
 ```
+
 
 ### 2.2 Using ext_localconf.php
 ```
@@ -136,12 +137,15 @@ configuration:
 );
 ```
 
+
 ### 2.3 Configuration
+
 #### 2.3.1 Registration parameters
 | Parameter     | Type  | Mandatory | Description                                                                                        |
 |---------------|-------|-----------|----------------------------------------------------------------------------------------------------|
 | dokType       | int   | ✓         | The dokType to register the new pageType with                                                      |
 | configuration | array | ✓         | The configuration of the pageType (see: [Configuration parameters](#232-configuration-parameters)) |
+
 
 #### 2.3.2 Configuration parameters
 | Parameter                    | Type   | Mandatory | Description                                                                                            |
@@ -158,13 +162,17 @@ configuration:
 | hideInMenuIcon | array |           | The icon of the page when "hideInMenu" is checked.           | - `'source' => '/path/to/file.png'`(EXT: is allowed)<br> - `'identifier' => 'already-registered-identifier'` |
 | rootPageIcon   | array |           | The icon of the page when the page is selected as root page. | - `'source' => '/path/to/file.png'`(EXT: is allowed)<br> - `'identifier' => 'already-registered-identifier'` |
 
+
 ## 3. Generic frontend list plugin (*tx_flexiblepages_pagelist*)
 *flexible_pages* provides a generic list plugin to list pages by specific pageTypes. Some settings of this plugin can be configured by the user to make it as flexible as possible:
+
 
 ### 3.1 Extending templates
 Extending the template select field makes it possible to add your own custom Templates. Custom templates can be added either by PageTS or the EXTCONF array.
 
+
 #### 3.1.1 Extending via PageTS
+
 ##### as associative array:
 ```typo3_typoscript
 tx_flexiblepages {
@@ -176,6 +184,8 @@ tx_flexiblepages {
   }
 }
 ```
+
+
 ##### as numeric array:
 ```typo3_typoscript
 tx_flexiblepages {
@@ -188,7 +198,9 @@ tx_flexiblepages {
 }
 ```
 
+
 #### 3.1.2 Extending via EXTCONF
+
 ##### as associative array:
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['flexible_pages']['tx_flexiblepages_pagelist']['templates'] = [
@@ -196,12 +208,15 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['flexible_pages']['tx_flexiblepages_pagel
     'myTemplate2' => 'My new template 2',
 ];
 ```
+
+
 ##### as numeric array:
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['flexible_pages']['tx_flexiblepages_pagelist']['templates'] = [
     'My new template', 'My new template 2'
 ];
 ```
+
 
 #### 3.1.3 Adding custom template file
 After extending the template configuration you want to add your custom template file. To do that you have to extend the fluid_styled_content rootPaths. You can either do this in your own extension by extending the `lib.contentElement` TypoScript (as described [HERE](https://docs.typo3.org/c/typo3/cms-fluid-styled-content/master/en-us/AddingYourOwnContentElements/Index.html#setup-txt)) or you could use the constants provided by flexible_pages:
@@ -211,9 +226,11 @@ After extending the template configuration you want to add your custom template 
 
 Finally you can add your custom template file in the previously specified `templateRootPath`.
 
+
 ##### File naming:
 - When you chose to extend the templates with a associative array, your template file has to be named like the key (as upper camelcase; e.g `MyTemplate.html`).
 - When you chose to extend the templates with a numeric array, your template file has to be named like the value (as upper camelcase; e.g `MyNewTemplate.html`).
+
 
 ### 3.2 Extending orderBy
 The `orderBy` selection can be extended as well to add custom order fields. For example if you added a new field `type` to your custom pageType you could also order by this field if necessary.
@@ -221,6 +238,7 @@ The `orderBy` selection can be extended as well to add custom order fields. For 
 For every added custom `orderBy` item an ascending and descending variant is created. Custom order fields can be added either by PageTS or the EXTCONF array.
 
 **NOTE: The key of the `orderBy` item must be the name of the field in the database! Numeric arrays are not allowed here.**
+
 
 #### 3.2.1 Extending via PageTS
 ```typo3_typoscript
@@ -232,6 +250,7 @@ tx_flexiblepages {
   }
 }
 ```
+
 
 #### 3.2.2 Extending via EXTCONF
 ```php

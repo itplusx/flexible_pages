@@ -45,6 +45,8 @@ class ItemsProcFunc
 
         if (isset($doktypes) && is_array($doktypes)) {
             foreach ($doktypes as $doktype) {
+                // Remove the "itemGroups" identifier to prevent the items from being split into separate sections.
+                unset($doktype[3]);
                 array_push($config['items'], $doktype);
             }
         }
