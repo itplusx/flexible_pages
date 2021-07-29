@@ -33,16 +33,9 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
 
         // Check if the data is already cached
         if ($this->hasCache() && $this->getCache()->get(ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER)) {
-            $cachedPageTypesConfiguration = $this->getCache()->get(
+            $cachedPageTypesConfiguration = $this->getCache()->require(
                 ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER
             );
-            // Due to the nature of PhpFrontend, the `<?php` and `#` wraps have to be removed
-            $cachedPageTypesConfiguration = preg_replace(
-                '/^<\?php\s*|\s*#$/',
-                '',
-                $cachedPageTypesConfiguration
-            );
-            $cachedPageTypesConfiguration = json_decode($cachedPageTypesConfiguration, true);
 
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = $cachedPageTypesConfiguration;
         } else {
@@ -123,11 +116,10 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
                 }
             }
         }
-
         if (empty($cachedPageTypesConfiguration) && $this->hasCache()) {
             $this->getCache()->set(
                 ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER,
-                json_encode($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'])
+                'return ' . var_export($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'], true) . ';'
             );
         }
     }
