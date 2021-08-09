@@ -7,6 +7,9 @@ use ITplusX\FlexiblePages\Tests\Fixtures\PageTypesConfigurationFixture;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @extensionScannerIgnoreFile
+ */
 class IconConfigurationTest extends TestCase
 {
     /**

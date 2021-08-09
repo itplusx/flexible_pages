@@ -54,6 +54,7 @@ class IconSetConfiguration extends AbstractBaseConfiguration
     public function getIconByType(string $iconType): Icon
     {
         $iconConfiguration = $this->getIconConfigurationByType($iconType);
+        // @extensionScannerIgnoreLine
         return $iconConfiguration->getIcon();
     }
 
