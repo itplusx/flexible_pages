@@ -114,6 +114,17 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
                         $pageType->getDokType()
                     );
                 }
+
+                if(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('headless')) {
+                    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
+                        \ITplusX\FlexiblePages\Utilities\ExtensionConfigurationUtility::EXTKEY,
+                        'setup',
+                        'lib.doktypeName {
+                            ' . $pageType->getDokType() .' = TEXT
+                            ' . $pageType->getDokType() .'.value = ' . $pageType->getLabel() .'
+                        }'
+                    );
+                }
             }
         }
         if (empty($cachedPageTypesConfiguration) && $this->hasCache()) {
