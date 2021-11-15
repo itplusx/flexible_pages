@@ -4,16 +4,14 @@ defined('TYPO3_MODE') || die ('Access denied.');
 $init = function ($extKey) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['extTablesInclusion-PostProcessing'][] = \ITplusX\FlexiblePages\Hooks\ExtTablesPostProcessing::class;
 
-    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$extKey])) {
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$extKey] = [
-            'frontend' => \TYPO3\CMS\Core\Cache\Frontend\PhpFrontend::class,
-            'backend' => \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class,
-            'options' => [
-                'defaultLifetime' => 0,
-            ],
-            'groups' => ['system']
-        ];
-    }
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$extKey] ??= [
+        'frontend' => \TYPO3\CMS\Core\Cache\Frontend\PhpFrontend::class,
+        'backend' => \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class,
+        'options' => [
+            'defaultLifetime' => 0,
+        ],
+        'groups' => ['system']
+    ];
 
     $icons = [
         'tx-flexiblepages-pagelist' => 'EXT:' . $extKey . '/Resources/Public/Icons/tx-flexiblepages-pagelist.svg'
