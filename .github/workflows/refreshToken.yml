@@ -1,0 +1,13 @@
+name: refreshToken
+
+on:
+  schedule:
+    # Every six months
+    - cron: '0 0 1 */6 *'
+
+jobs:
+  refreshToken:
+    uses: itplusx/github-workflows/.github/workflows/refresh-typo3-api-access-token.yml@main
+    secrets:
+      access-token: ${{ secrets.TYPO3_API_REFRESH_TOKEN }}
+
