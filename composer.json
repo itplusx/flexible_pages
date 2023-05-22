@@ -70,5 +70,13 @@
       "web-dir": ".Build/Web",
       "extension-key": "flexible_pages"
     }
+  },
+  "scripts": {
+    "prepare-release": [
+      "rm -rf Tests/",
+      "rm -rf .github/",
+      "rm .gitignore",
+      "rm .editorconfig"
+    ]
   }
 }
