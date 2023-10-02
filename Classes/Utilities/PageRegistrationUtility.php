@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace ITplusX\FlexiblePages\Utilities;
 
+use TYPO3\CMS\Core\DataHandling\PageDoktypeRegistry;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class PageRegistrationUtility
 {
     /**
-     * Registers a new page type in $PAGES_TYPES.
+     * Registers a new page type with PageDoktypeRegistry.
      *
      * @param int $dokType
      * @param bool $overwriteExisting
@@ -20,10 +23,14 @@ class PageRegistrationUtility
         if (!$overwriteExisting && self::isRegistered($dokType)) {
             return;
         }
-
-        $GLOBALS['PAGES_TYPES'][$dokType] = [
-            'allowedTables' => $allowedTables,
-        ];
+        $dokTypeRegistry = self::getDoktypeRegistry();
+        $dokTypeRegistry->add(
+            $dokType,
+            [
+                'type' => 'web',
+                'allowedTables' => $allowedTables,
+            ]
+        );
     }
 
     /**
@@ -34,6 +41,11 @@ class PageRegistrationUtility
      */
     public static function isRegistered($dokType): bool
     {
-        return isset($GLOBALS['PAGES_TYPES'][$dokType]);
+        return in_array($dokType, self::getDoktypeRegistry()->getRegisteredDoktypes());
+    }
+
+    protected static function getDoktypeRegistry()
+    {
+        return GeneralUtility::makeInstance(PageDoktypeRegistry::class);
     }
 }
