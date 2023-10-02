@@ -2,8 +2,6 @@
 defined('TYPO3') or die();
 
 $init = function ($extKey) {
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['extTablesInclusion-PostProcessing'][] = \ITplusX\FlexiblePages\Hooks\ExtTablesPostProcessing::class;
-
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][$extKey] ??= [
         'frontend' => \TYPO3\CMS\Core\Cache\Frontend\PhpFrontend::class,
         'backend' => \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class,

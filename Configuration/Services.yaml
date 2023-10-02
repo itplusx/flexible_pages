@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  ITplusX\FlexiblePages\Bootstrap\BootCompletedEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'flexible-pages/boot-completed-event-listener'
