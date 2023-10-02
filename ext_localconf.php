@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') || die ('Access denied.');
+defined('TYPO3') or die();
 
 $init = function ($extKey) {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['GLOBAL']['extTablesInclusion-PostProcessing'][] = \ITplusX\FlexiblePages\Hooks\ExtTablesPostProcessing::class;
