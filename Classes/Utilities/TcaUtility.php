@@ -45,26 +45,22 @@ class TcaUtility
      * @param int $dokType
      * @param string $label
      * @param string $iconIdentifier
-     * @param string $relativeToField Add item relative to existing field
-     * @param string $relativePosition Valid keywords: 'before', 'after'
      */
     public static function addPageTypeSelectItem(
         int $dokType,
         string $label,
-        string $iconIdentifier,
-        string $relativeToField = '6',
-        string $relativePosition = 'after'
+        string $iconIdentifier
     ) {
+        list($table, $field) = ['pages', 'doktype'];
+
         ExtensionManagementUtility::addTcaSelectItem(
-            'pages',
-            'doktype',
+            $table,
+            $field,
             [
-                $label,
-                $dokType,
-                $iconIdentifier,
-            ],
-            $relativeToField,
-            $relativePosition
+                'label' => $label,
+                'value' => $dokType,
+                'icon' => $iconIdentifier
+            ]
         );
     }
 
