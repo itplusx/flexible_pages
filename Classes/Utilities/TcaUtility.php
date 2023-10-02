@@ -51,7 +51,15 @@ class TcaUtility
         string $label,
         string $iconIdentifier
     ) {
-        list($table, $field) = ['pages', 'doktype'];
+        list($table, $field, $groupId) = ['pages', 'doktype', 'flexible'];
+
+        ExtensionManagementUtility::addTcaSelectItemGroup(
+            $table,
+            $field,
+            $groupId,
+            'Flexible Pages',
+            'after:special'
+        );
 
         ExtensionManagementUtility::addTcaSelectItem(
             $table,
@@ -59,7 +67,8 @@ class TcaUtility
             [
                 'label' => $label,
                 'value' => $dokType,
-                'icon' => $iconIdentifier
+                'icon' => $iconIdentifier,
+                'group' => $groupId
             ]
         );
     }
