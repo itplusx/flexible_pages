@@ -116,7 +116,7 @@ class BootCompletedEventListener
                     ExtensionManagementUtility::addTypoScript(
                         ExtensionConfigurationUtility::EXTKEY,
                         'setup',
-                        'lib.doktypeName {
+                        'page.10.fields.type {
                             ' . $pageType->getDokType() .' = TEXT
                             ' . $pageType->getDokType() .'.value = ' . $pageType->getLabel() .'
                         }'

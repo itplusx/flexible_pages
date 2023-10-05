@@ -17,7 +17,7 @@ $EM_CONF[$_EXTKEY] = [
         ],
         'conflicts' => [],
         'suggests' => [
-            'headless' => '2.0.0-2.99.99'
+            'headless' => '4.0.0-4.99.99'
         ],
     ],
     'autoload' => [

@@ -18,7 +18,7 @@ tt_content.tx_flexiblepages_pagelist {
                             current = 1
                             wrap = |,
 
-                            cObject =< lib.doktypeName
+                            cObject =< page.10.fields.type
                             cObject.key.override.data = current
                         }
 
@@ -75,12 +75,12 @@ tt_content.tx_flexiblepages_pagelist {
                             begin.data = flexform:pi_flexform:offset
                         }
 
-                        renderObj =< lib.page
+                        renderObj =< page.10
                         renderObj.fields {
-                            isActive = TEXT
+                            isActive = BOOL
                             isActive.field = isActive
 
-                            isCurrent = TEXT
+                            isCurrent = BOOL
                             isCurrent.field = isCurrent
                         }
                         renderObj.stdWrap.wrap = |###BREAK###
