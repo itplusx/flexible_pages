@@ -11,21 +11,6 @@ $init = function ($extKey) {
         'groups' => ['system']
     ];
 
-    $icons = [
-        'tx-flexiblepages-pagelist' => 'EXT:' . $extKey . '/Resources/Public/Icons/tx-flexiblepages-pagelist.svg'
-    ];
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-
-    foreach ($icons as $iconIdentifier => $iconFile) {
-        $iconRegistry->registerIcon(
-            $iconIdentifier,
-            TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-            [
-                'source' => $iconFile,
-            ]
-        );
-    }
-
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
         '@import \'EXT:' . $extKey . '/Configuration/TSconfig/Page/Mod/Wizards/NewContentElement.tsconfig\''
     );
