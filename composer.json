@@ -11,7 +11,8 @@
   ],
   "homepage": "https://itplusx.de",
   "support": {
-    "issues": "https://itplusx.de"
+    "issues": "https://github.com/itplusx/flexible_pages/issues",
+    "email": "typo3@itplusx.de",
   },
   "authors": [
     {
