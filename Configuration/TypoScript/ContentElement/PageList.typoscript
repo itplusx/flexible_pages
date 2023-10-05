@@ -16,10 +16,8 @@ tt_content.tx_flexiblepages_pagelist {
     }
 
     dataProcessing {
-        10 = ITplusX\FlexiblePages\DataProcessing\FlexFormProcessor
-
-        20 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
-        20 {
+        10 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+        10 {
             if {
                 isTrue.field = pages
                 isTrue {
