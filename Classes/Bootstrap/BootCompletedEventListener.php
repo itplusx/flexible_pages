@@ -1,6 +1,8 @@
 <?php
 
-namespace ITplusX\FlexiblePages\Hooks;
+declare(strict_types=1);
+
+namespace ITplusX\FlexiblePages\Bootstrap;
 
 use ITplusX\FlexiblePages\Configuration\Exceptions\InvalidConfigurationException;
 use ITplusX\FlexiblePages\Configuration\PageTypesConfiguration;
@@ -14,17 +16,14 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Database\TableConfigurationPostProcessingHookInterface;
+use TYPO3\CMS\Core\Core\Event\BootCompletedEvent;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInterface
+class BootCompletedEventListener
 {
-    /**
-     * @throws InvalidConfigurationException
-     */
-    public function processData()
+    public function __invoke(BootCompletedEvent $event): void
     {
         if (!(isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'])
             && is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes']))) {
@@ -40,8 +39,6 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = $cachedPageTypesConfiguration;
         } else {
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
-
-            $configPaths = [];
 
             // Global configuration path
             $configPaths[] = Environment::getConfigPath() . '/' . ExtensionConfigurationUtility::EXTKEY;
@@ -115,9 +112,9 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
                     );
                 }
 
-                if(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('headless')) {
-                    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript(
-                        \ITplusX\FlexiblePages\Utilities\ExtensionConfigurationUtility::EXTKEY,
+                if(ExtensionManagementUtility::isLoaded('headless')) {
+                    ExtensionManagementUtility::addTypoScript(
+                        ExtensionConfigurationUtility::EXTKEY,
                         'setup',
                         'lib.doktypeName {
                             ' . $pageType->getDokType() .' = TEXT
@@ -127,7 +124,7 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
                 }
             }
         }
-        if (empty($cachedPageTypesConfiguration) && $this->hasCache()) {
+        if (empty($cachedPageTypesConfiguration) && $this->hasCache() && $event->isCachingEnabled()) {
             $this->getCache()->set(
                 ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER,
                 'return ' . var_export($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'], true) . ';'
@@ -136,7 +133,7 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
     }
 
     /**
-     * Short-hand function for the cache
+     * Returns the cache specified by $identifier
      *
      * @return FrontendInterface
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
@@ -148,7 +145,7 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
     }
 
     /**
-     * Short-hand function for the cache
+     * Checks if the specified cache has been registered.
      *
      * @return FrontendInterface
      * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
@@ -159,4 +156,3 @@ class ExtTablesPostProcessing implements TableConfigurationPostProcessingHookInt
             ->hasCache(ExtensionConfigurationUtility::CACHE_IDENTIFIER);
     }
 }
-

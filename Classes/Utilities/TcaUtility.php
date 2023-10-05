@@ -45,26 +45,31 @@ class TcaUtility
      * @param int $dokType
      * @param string $label
      * @param string $iconIdentifier
-     * @param string $relativeToField Add item relative to existing field
-     * @param string $relativePosition Valid keywords: 'before', 'after'
      */
     public static function addPageTypeSelectItem(
         int $dokType,
         string $label,
-        string $iconIdentifier,
-        string $relativeToField = '6',
-        string $relativePosition = 'after'
+        string $iconIdentifier
     ) {
+        list($table, $field, $groupId) = ['pages', 'doktype', 'flexible'];
+
+        ExtensionManagementUtility::addTcaSelectItemGroup(
+            $table,
+            $field,
+            $groupId,
+            'Flexible Pages',
+            'after:special'
+        );
+
         ExtensionManagementUtility::addTcaSelectItem(
-            'pages',
-            'doktype',
+            $table,
+            $field,
             [
-                $label,
-                $dokType,
-                $iconIdentifier,
-            ],
-            $relativeToField,
-            $relativePosition
+                'label' => $label,
+                'value' => $dokType,
+                'icon' => $iconIdentifier,
+                'group' => $groupId
+            ]
         );
     }
 
@@ -84,15 +89,16 @@ class TcaUtility
         ) {
             $fieldItems = $GLOBALS['TCA'][$table]['columns'][$field]['config']['items'];
             foreach ($fieldItems as $item) {
-                if (!is_array($item) || in_array($item[1], $excludeItems)) {
+                if (!is_array($item) || in_array($item['value'], $excludeItems)) {
                     // Skip non arrays and excluded items
                     continue;
                 }
+                unset($item['group']);
                 $items[] = $item;
             }
 
             // Remove last item if it is a divider
-            if (end($items)[1] === '--div--') {
+            if (end($items)['value'] === '--div--') {
                 array_pop($items);
             }
         }
