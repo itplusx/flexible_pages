@@ -12,7 +12,6 @@ use ITplusX\FlexiblePages\Utilities\IconRegistrationUtility;
 use ITplusX\FlexiblePages\Utilities\PageRegistrationUtility;
 use ITplusX\FlexiblePages\Utilities\TcaUtility;
 use ITplusX\FlexiblePages\Utilities\TsConfigUtility;
-use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
@@ -23,6 +22,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class BootCompletedEventListener
 {
+    public function __construct(
+        private readonly FrontendInterface $cache,
+    ) {}
+
     public function __invoke(BootCompletedEvent $event): void
     {
         if (!(isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'])
@@ -30,12 +33,8 @@ class BootCompletedEventListener
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = [];
         }
 
-        // Check if the data is already cached
-        if ($this->hasCache() && $this->getCache()->get(ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER)) {
-            $cachedPageTypesConfiguration = $this->getCache()->require(
-                ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER
-            );
-
+        $cachedPageTypesConfiguration = $this->cache->get('fullConfiguration');
+        if ($cachedPageTypesConfiguration) {
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = $cachedPageTypesConfiguration;
         } else {
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
@@ -124,10 +123,14 @@ class BootCompletedEventListener
                 }
             }
         }
-        if (empty($cachedPageTypesConfiguration) && $this->hasCache() && $event->isCachingEnabled()) {
-            $this->getCache()->set(
-                ExtensionConfigurationUtility::CACHE_ENTRY_IDENTIFIER,
-                'return ' . var_export($GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'], true) . ';'
+
+        if (
+            $event->isCachingEnabled()
+            && $cachedPageTypesConfiguration != $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes']
+        ) {
+            $this->cache->set(
+                'fullConfiguration',
+                $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes']
             );
         }
     }
