@@ -4,7 +4,17 @@ services:
     autoconfigure: true
     public: false
 
+  ITplusX\FlexiblePages\:
+    resource: '../Classes/*'
+
+  cache.flexiblepages_configurationcache:
+    class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
+    factory: [ '@TYPO3\CMS\Core\Cache\CacheManager', 'getCache' ]
+    arguments: [ 'flexiblepages_configurationcache' ]
+
   ITplusX\FlexiblePages\Bootstrap\BootCompletedEventListener:
+    arguments:
+      $cache: '@cache.flexiblepages_configurationcache'
     tags:
       - name: event.listener
         identifier: 'flexible-pages/boot-completed-event-listener'
