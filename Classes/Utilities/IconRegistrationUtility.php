@@ -70,7 +70,7 @@ class IconRegistrationUtility
     {
         $ext = pathinfo($filenameOrPath, PATHINFO_EXTENSION);
 
-        return str_replace(
+        return 'tx-flexiblepages-' . str_replace(
             '_',
             '-',
             GeneralUtility::camelCaseToLowerCaseUnderscored(basename($filenameOrPath, '.' . $ext))
