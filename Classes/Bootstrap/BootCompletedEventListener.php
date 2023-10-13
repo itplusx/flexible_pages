@@ -134,28 +134,4 @@ class BootCompletedEventListener
             );
         }
     }
-
-    /**
-     * Returns the cache specified by $identifier
-     *
-     * @return FrontendInterface
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
-     */
-    protected function getCache(): FrontendInterface
-    {
-        return GeneralUtility::makeInstance(CacheManager::class)
-            ->getCache(ExtensionConfigurationUtility::CACHE_IDENTIFIER);
-    }
-
-    /**
-     * Checks if the specified cache has been registered.
-     *
-     * @return FrontendInterface
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
-     */
-    protected function hasCache()
-    {
-        return GeneralUtility::makeInstance(CacheManager::class)
-            ->hasCache(ExtensionConfigurationUtility::CACHE_IDENTIFIER);
-    }
 }
