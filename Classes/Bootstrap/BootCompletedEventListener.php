@@ -17,6 +17,7 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Core\Event\BootCompletedEvent;
 use TYPO3\CMS\Core\Domain\Repository\PageRepository;
+use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -39,12 +40,17 @@ class BootCompletedEventListener
         } else {
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
 
-            // Global configuration path
+            // Global configuration path (/config/flexible_pages/)
             $configPaths[] = Environment::getConfigPath() . '/' . ExtensionConfigurationUtility::EXTKEY;
 
-            // Configuration path in every active extension
-            foreach (ExtensionManagementUtility::getLoadedExtensionListArray() as $activeExtension) {
-                $configPaths[] = Environment::getPublicPath() . '/typo3conf/ext/' . $activeExtension . '/Configuration/Yaml/' . ExtensionConfigurationUtility::EXTKEY;
+            // Configuration path in every active local extension
+            $packageManager = GeneralUtility::makeInstance(PackageManager::class);
+            $localExtensions = array_filter($packageManager->getActivePackages(), function($extension) {
+                return $extension->getPackageMetaData()->isExtensionType() === true;
+            });
+
+            foreach ($localExtensions as $extension) {
+                $configPaths[] = $extension->getPackagePath() . 'Configuration/Yaml/' . ExtensionConfigurationUtility::EXTKEY;
             }
 
             // Custom configuration path from extension configuration
