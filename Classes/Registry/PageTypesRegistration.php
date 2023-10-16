@@ -24,7 +24,7 @@ class PageTypesRegistration implements SingletonInterface
      * @internal
      * @var string
      */
-    protected $configFileName = 'config.yaml';
+    protected $configFileName = '*.{yaml,yml}';
 
     /**
      * @param array additionalConfigPaths
@@ -72,13 +72,13 @@ class PageTypesRegistration implements SingletonInterface
     {
         $pageTypeConfiguration = [];
 
-        $finder = (new Finder())->files()->depth(0)->name($this->configFileName);
+        $finder = (new Finder())->files()->name($this->configFileName);
         $hasConfigurationFiles = false;
         foreach (array_filter($this->configPaths) as $configPath) {
             try {
-                $finder->in($configPath . '/*');
+                $finder->in($configPath);
             } catch (\InvalidArgumentException $e) {
-                // Directory $configPath does not exist yet
+                // Directory $configPath does not exist
                 continue;
             }
             $hasConfigurationFiles = true;

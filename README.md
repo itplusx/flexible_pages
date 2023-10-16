@@ -73,9 +73,12 @@ As with the site configuration of the TYPO3 core it is also possible to add YAML
 Example:
 ```
 config/
-└── flexible_pages/      --> Required to be named exactly like this.
-    └── myNewPageType/   --> Identifier of your pageType. Not used by the registering process yet.
-        └── config.yaml  --> Required to be named exactly like this.
+└── flexible_pages/
+    └── myNewPageType.yaml
+    └── myOtherPageType.yaml
+    └── Articles
+        └── blogArticle.yaml
+        └── newsArticle.yaml
 ```
 
 
@@ -84,13 +87,15 @@ It is also possible for every third-party extension to use `flexible_pages` as b
 
 Example:
 ```
-typo3conf/
-└── ext/
-    └── your_extensionkey/
-        └── Configuration/
-            └── flexible_pages/      --> Required to be named exactly like this.
-                └── myNewPageType/   --> Identifier of your pageType. Not used by the registering process yet.
-                    └── config.yaml  --> Required to be named exactly like this.
+your_extensionkey/
+└── Configuration/
+    └── Yaml
+        └── flexible_pages/
+            └── myNewPageType.yaml
+            └── myOtherPageType.yaml
+            └── Articles
+                └── blogArticle.yaml
+                └── newsArticle.yaml
 ```
 
 
