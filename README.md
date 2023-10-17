@@ -106,39 +106,36 @@ Beside the first two pre-defined directory paths it is also possible to define a
 #### 2.1.4 YAML File Example
 ```
 dokType: 87
-configuration:
-  label: 'My Custom pageType'
-  iconSet:
-    defaultIcon:
-      source: 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype.svg'
-    hideInMenuIcon:
-      identifier: 'apps-pagetree-page-frontend-user-hideinmenu'
-    rootPageIcon:
-      source: 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype-root.svg'
-  isDraggableInNewPageDragArea: true
+label: 'My Custom pageType'
+iconSet:
+  defaultIcon:
+    source: 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype.svg'
+  hideInMenuIcon:
+    identifier: 'apps-pagetree-page-frontend-user-hideinmenu'
+  rootPageIcon:
+    source: 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype-root.svg'
+isDraggableInNewPageDragArea: true
 
 ```
 
 
 ### 2.2 Using ext_localconf.php
-```
+```php
 \ITplusX\FlexiblePages\Registry\PageTypesRegistration::registerPageType(
-    87,
-    [
-        'label' => 'My Custom pageType',
-        'iconSet' => [
-            \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_DEFAULT => [
-                'source' => 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype.svg',
-            ],
-            \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_HIDE_IN_MENU => [
-                'identifier' => 'apps-pagetree-page-frontend-user-hideinmenu',
-            ]
-            \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_ROOT_PAGE => [
-                'source' => 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype-root.svg',
-            ]
-        ],
-        'isDraggableInNewPageDragArea' => true
+  87
+  'My Custom pageType',
+  [
+    \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_DEFAULT => [
+        'source' => 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype.svg',
+    ],
+    \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_HIDE_IN_MENU => [
+        'identifier' => 'apps-pagetree-page-frontend-user-hideinmenu',
     ]
+    \ITplusX\FlexiblePages\Configuration\IconSetConfiguration::ICON_TYPE_ROOT_PAGE => [
+        'source' => 'EXT:your_ext/Resources/Public/Icons/apps-pagetree-mycustompagetype-root.svg',
+    ]
+  ],
+  'isDraggableInNewPageDragArea' => true
 );
 ```
 
@@ -146,21 +143,15 @@ configuration:
 ### 2.3 Configuration
 
 #### 2.3.1 Registration parameters
-| Parameter     | Type  | Mandatory | Description                                                                                        |
-|---------------|-------|-----------|----------------------------------------------------------------------------------------------------|
-| dokType       | int   | ✓         | The dokType to register the new pageType with                                                      |
-| configuration | array | ✓         | The configuration of the pageType (see: [Configuration parameters](#232-configuration-parameters)) |
-
-
-#### 2.3.2 Configuration parameters
 | Parameter                    | Type   | Mandatory | Description                                                                                            |
 |------------------------------|--------|-----------|--------------------------------------------------------------------------------------------------------|
+| dokType                      | int    | ✓         | The dokType to register the new pageType with                                                          |
 | label                        | string | ✓         | The label of the new pageType                                                                          |
-| iconSet                      | array  | ✓         | The iconSet array of the newPageType. (see: [iconSet configuration parameters](#233-icons-parameters)) |
+| iconSet                      | array  | ✓         | The iconSet array of the newPageType. (see: [iconSet configuration parameters](#232-icons-parameters)) |
 | isDraggableInNewPageDragArea | bool   |           | Defines if the new pageType is draggable from above the page tree. (Default: false)                    |
 
 
-#### 2.3.3 Icons parameters
+#### 2.3.2 Icons parameters
 | Parameter      | Type  | Mandatory | Description                                                  | Possible values                                                                                          |
 |----------------|-------|-----------|--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | defaultIcon    | array | ✓         | The default icon of the page.                                | - `'source' => '/path/to/file.png'`(EXT: is allowed)<br> - `'identifier' => 'already-registered-identifier'` |

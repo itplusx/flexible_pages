@@ -43,23 +43,32 @@ class PageTypesRegistration implements SingletonInterface
     {
         $pageTypes = $this->getAllPageTypeConfigurationFromFiles();
 
-        foreach ($pageTypes as $dokType => $pageTypeConfiguration) {
-            self::registerPageType(
-                $dokType,
-                $pageTypeConfiguration['configuration']
-            );
+        foreach ($pageTypes as $pageTypeConfiguration) {
+            self::registerPageType(...$pageTypeConfiguration);
         }
     }
 
     /**
      * Register a single pageType
      *
-     * @param int $dokType The dokType to register the new pageType with
-     * @param array $configuration The configuration of the pageType
+     * @param int $dokType
+     * @param string $label
+     * @param array $iconSet
+     * @param bool $isDraggableInNewPageDragArea
+     * @return void
      */
-    public static function registerPageType(int $dokType, array $configuration): void
+    public static function registerPageType(
+        int $dokType,
+        string $label,
+        array $iconSet,
+        bool $isDraggableInNewPageDragArea = false
+    ): void
     {
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'][$dokType] = $configuration;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'][$dokType] = [
+            'label' => $label,
+            'iconSet' => $iconSet,
+            'isDraggableInNewPageDragArea' => $isDraggableInNewPageDragArea
+        ];
     }
 
     /**
