@@ -29,21 +29,11 @@ class IconConfiguration extends AbstractBaseConfiguration
     public function getIcon(): Icon
     {
         if (!($this->icon instanceof Icon)) {
-            $identifier = '';
-            $source = '';
+            $identifier = $this?->configuration['identifier'] ?? '';
+            $source = $this?->configuration['source'] ?? '';
 
-            extract($this->configuration);
-
-            if (static::isCustomConfiguration($this->configuration)) {
-                if (static::isExistingIdentifier($identifier)) {
-                    throw new InvalidConfigurationException(
-                        'Invalid configuration of icon. Identifier ' . $identifier . ' exists already.'
-                    );
-                }
-            } else {
-                if (static::isFileReference($source)) {
-                    $identifier = IconRegistrationUtility::convertFilenameToIdentifier($source);
-                }
+            if (static::isFileReference($source)) {
+                $identifier = IconRegistrationUtility::convertFilenameToIdentifier($source);
             }
 
             if (empty(trim($identifier))) {
@@ -59,10 +49,18 @@ class IconConfiguration extends AbstractBaseConfiguration
 
     public static function validate(array $configuration): ValidationResult
     {
-        $validationResult = new ValidationResult();
+        $validationResult = GeneralUtility::makeInstance(ValidationResult::class);
 
         if (!(self::hasValidIdentifier($configuration) || self::hasValidSource($configuration))) {
             $validationResult->addError('Either identifier or source has to be set.');
+        }
+
+        if (self::isCustomConfiguration($configuration) && self::isExistingIdentifier($configuration['identifier'])) {
+            $validationResult->addError('Identifier "' . $configuration['identifier'] . '" exists already. Either change the identifier or omit the "source" key to use the existing icon.');
+        }
+
+        if (self::hasValidIdentifier($configuration) && !self::isExistingIdentifier($configuration['identifier'])) {
+            $validationResult->addError('Identifier "' . $configuration['identifier'] . '" does not exist. Either change the identifier or use the "source" key to register a new icon with this identifier.');
         }
 
         return $validationResult;
@@ -109,7 +107,7 @@ class IconConfiguration extends AbstractBaseConfiguration
      */
     public static function hasValidIdentifier(array $configuration): bool
     {
-        return array_key_exists('identifier', $configuration);
+        return array_key_exists('identifier', $configuration) && empty($configuration['identifier']) === false;
     }
 
     /**
@@ -120,6 +118,6 @@ class IconConfiguration extends AbstractBaseConfiguration
      */
     public static function hasValidSource(array $configuration): bool
     {
-        return array_key_exists('source', $configuration);
+        return array_key_exists('source', $configuration) && empty($configuration['source']) === false;
     }
 }
