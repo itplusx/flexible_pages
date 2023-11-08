@@ -24,7 +24,7 @@ class PageTypesRegistration implements SingletonInterface
      * @internal
      * @var string
      */
-    protected $configFileName = '*.{yaml,yml}';
+    protected $configFileName = '*.yaml';
 
     /**
      * @param array additionalConfigPaths

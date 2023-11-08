@@ -50,7 +50,9 @@ class BootCompletedEventListener
             });
 
             foreach ($localExtensions as $extension) {
-                $configPaths[] = $extension->getPackagePath() . 'Configuration/{Yaml,YAML}/' . ExtensionConfigurationUtility::EXTKEY;
+                foreach (['YAML', 'Yaml'] as $yamlDirectoryName) {
+                    $configPaths[] = $extension->getPackagePath() . 'Configuration/' . $yamlDirectoryName . '/' . ExtensionConfigurationUtility::EXTKEY;
+                }
             }
 
             // Custom configuration path from extension configuration
