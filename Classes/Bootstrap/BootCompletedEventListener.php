@@ -35,7 +35,7 @@ class BootCompletedEventListener
         }
 
         $cachedPageTypesConfiguration = $this->cache->get('fullConfiguration');
-        if ($cachedPageTypesConfiguration) {
+        if ($cachedPageTypesConfiguration !== false) {
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'][ExtensionConfigurationUtility::EXTKEY]['pageTypes'] = $cachedPageTypesConfiguration;
         } else {
             $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class);
