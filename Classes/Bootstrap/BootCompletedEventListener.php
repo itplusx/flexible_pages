@@ -126,7 +126,8 @@ class BootCompletedEventListener
                         'page.10.fields.type {
                             ' . $pageType->getDokType() .' = TEXT
                             ' . $pageType->getDokType() .'.value = ' . $pageType->getLabel() .'
-                        }'
+                        }',
+                        'defaultContentRendering'
                     );
                 }
             }
