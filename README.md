@@ -11,7 +11,7 @@
 
 **Setup custom page types in TYPO3 with ease.**
 
-This extensions reduces the [registration of custom page types in TYPO3](https://docs.typo3.org/typo3cms/CoreApiReference/latest/ApiOverview/PageTypes/Index.html) to a simple setup using *YAML* files.
+This extensions reduces the [registration of custom page types in TYPO3](https://docs.typo3.org/m/typo3/reference-coreapi/12.4/en-us/ApiOverview/PageTypes/CreateNewPageType.html) to a simple setup using *YAML* files.
 
 * Features
 * Roadmap
@@ -51,7 +51,7 @@ This extensions reduces the [registration of custom page types in TYPO3](https:/
 
 
 ### 1.2 Installation with the [TYPO3 Extension Manager](https://docs.typo3.org/typo3cms/GettingStartedTutorial/ExtensionManager/Index.html#installing-a-new-extension)
-Use the Extension Key `flexible_pages` in the [TYPO3 Extension Manager](https://docs.typo3.org/typo3cms/GettingStartedTutorial/ExtensionManager/Index.html#installing-a-new-extension).
+Use the Extension Key `flexible_pages` in the [TYPO3 Extension Manager](https://docs.typo3.org/m/typo3/reference-coreapi/12.4/en-us/ExtensionArchitecture/HowTo/ExtensionManagement.html#installing-extensions).
 
 
 ## 2. Registering custom pages types
