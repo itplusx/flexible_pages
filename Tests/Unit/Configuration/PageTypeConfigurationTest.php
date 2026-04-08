@@ -34,7 +34,7 @@ class PageTypeConfigurationTest extends TestCase
     public function testInvalidConfigurationExceptionMessageContainsClassName()
     {
         $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionMessageMatches('/PageTypeConfiguration/');
+        $this->expectExceptionMessageRegExp('/PageTypeConfiguration/');
 
         new PageTypeConfiguration([]);
     }
