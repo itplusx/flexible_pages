@@ -62,15 +62,16 @@ class IconRegistrationUtility
     /**
      * Returns the filename converted to the common pattern of an icons identifier
      *
-     * @param $filenameOrPath
+     * @param string $filenameOrPath
      *
-     * @return mixed
+     * @return string
      */
-    public static function convertFilenameToIdentifier($filenameOrPath)
+    public static function convertFilenameToIdentifier(string $filenameOrPath): string
     {
         $ext = pathinfo($filenameOrPath, PATHINFO_EXTENSION);
+        $prefix = 'tx-' . str_replace('_', '', ExtensionConfigurationUtility::EXTKEY) . '-';
 
-        return 'tx-flexiblepages-' . str_replace(
+        return $prefix . str_replace(
             '_',
             '-',
             GeneralUtility::camelCaseToLowerCaseUnderscored(basename($filenameOrPath, '.' . $ext))
