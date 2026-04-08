@@ -47,6 +47,6 @@ class IconSetConfigurationTest extends TestCase
         /** @var IconSet $iconSet */
         $iconSet = GeneralUtility::makeInstance(IconSetConfiguration::class, $iconSetConfiguration)->getIconSet();
 
-        $this->assertSame('icon-111', $iconSet->getDefaultIcon()->getIdentifier());
+        $this->assertSame('tx-flexiblepages-icon-111', $iconSet->getDefaultIcon()->getIdentifier());
     }
 }
