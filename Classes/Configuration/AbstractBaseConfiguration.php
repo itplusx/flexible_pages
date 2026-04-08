@@ -30,7 +30,7 @@ abstract class AbstractBaseConfiguration
             // TODO: This is crappy. Do it better!!!
             $errorsAsString = implode("\n", $validationResult->getErrors());
 
-            throw new InvalidConfigurationException("Invalid $configurationClassName.\n" . $errorsAsString);
+            throw new InvalidConfigurationException("Invalid $configurationClassName. " . $errorsAsString);
         }
         $this->configuration = $configuration;
     }
