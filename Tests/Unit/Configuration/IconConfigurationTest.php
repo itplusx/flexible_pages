@@ -74,7 +74,7 @@ class IconConfigurationTest extends TestCase
     public function testInvalidConfigurationExceptionMessageContainsClassName()
     {
         $this->expectException(InvalidConfigurationException::class);
-        $this->expectExceptionMessageMatches('/IconConfiguration/');
+        $this->expectExceptionMessageRegExp('/IconConfiguration/');
 
         new IconConfiguration([]);
     }
