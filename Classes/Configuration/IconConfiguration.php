@@ -56,7 +56,7 @@ class IconConfiguration extends AbstractBaseConfiguration
         }
 
         if (self::isCustomConfiguration($configuration) && self::isExistingIdentifier($configuration['identifier'])) {
-            $validationResult->addError('Identifier "' . $configuration['identifier'] . '" exists already. Either change the identifier or omit the "source" key to use the existing icon.');
+            $validationResult->addError(sprintf('Identifier "%s" exists already. Either change the identifier or omit the "source" key to use the existing icon.', $configuration['identifier']));
         }
 
         if (
@@ -64,7 +64,7 @@ class IconConfiguration extends AbstractBaseConfiguration
             && !self::hasValidSource($configuration)
             && !self::isExistingIdentifier($configuration['identifier'])
         ) {
-            $validationResult->addError('Identifier "' . $configuration['identifier'] . '" does not exist. Either change the identifier or use the "source" key to register a new icon with this identifier.');
+            $validationResult->addError(sprintf('Identifier "%s" does not exist. Either change the identifier or use the "source" key to register a new icon with this identifier.', $configuration['identifier']));
         }
 
         return $validationResult;
@@ -111,7 +111,9 @@ class IconConfiguration extends AbstractBaseConfiguration
      */
     public static function hasValidIdentifier(array $configuration): bool
     {
-        return array_key_exists('identifier', $configuration) && empty($configuration['identifier']) === false;
+        return array_key_exists('identifier', $configuration)
+            && is_string($configuration['identifier'])
+            && trim($configuration['identifier']) !== '';
     }
 
     /**
@@ -122,6 +124,8 @@ class IconConfiguration extends AbstractBaseConfiguration
      */
     public static function hasValidSource(array $configuration): bool
     {
-        return array_key_exists('source', $configuration) && empty($configuration['source']) === false;
+        return array_key_exists('source', $configuration)
+            && is_string($configuration['source'])
+            && trim($configuration['source']) !== '';
     }
 }
