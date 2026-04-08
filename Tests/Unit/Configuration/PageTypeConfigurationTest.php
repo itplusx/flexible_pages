@@ -1,6 +1,7 @@
 <?php
 namespace ITplusX\FlexiblePages\Tests\Unit\Configuration;
 
+use ITplusX\FlexiblePages\Configuration\Exceptions\InvalidConfigurationException;
 use ITplusX\FlexiblePages\Configuration\PageTypeConfiguration;
 use ITplusX\FlexiblePages\Tests\Fixtures\PageTypesConfigurationFixture;
 use PHPUnit\Framework\TestCase;
@@ -28,5 +29,13 @@ class PageTypeConfigurationTest extends TestCase
         $pageType = $pageTypeConfiguration->getPageType();
 
         $this->assertSame($label, $pageType->getLabel());
+    }
+
+    public function testInvalidConfigurationExceptionMessageContainsClassName()
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionMessageMatches('/PageTypeConfiguration/');
+
+        new PageTypeConfiguration([]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 namespace ITplusX\FlexiblePages\Tests\Unit\Configuration;
 
+use ITplusX\FlexiblePages\Configuration\Exceptions\InvalidConfigurationException;
 use ITplusX\FlexiblePages\Configuration\IconConfiguration;
 use ITplusX\FlexiblePages\Page\Icon;
 use ITplusX\FlexiblePages\Tests\Fixtures\PageTypesConfigurationFixture;
@@ -68,5 +69,13 @@ class IconConfigurationTest extends TestCase
         $icon = GeneralUtility::makeInstance(IconConfiguration::class, $iconConfiguration)->getIcon();
 
         $this->assertSame('tx-flexiblepages-icon-111', $icon->getIdentifier());
+    }
+
+    public function testInvalidConfigurationExceptionMessageContainsClassName()
+    {
+        $this->expectException(InvalidConfigurationException::class);
+        $this->expectExceptionMessageMatches('/IconConfiguration/');
+
+        new IconConfiguration([]);
     }
 }
