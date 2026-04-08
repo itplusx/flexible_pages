@@ -7,6 +7,7 @@ use ITplusX\FlexiblePages\Page\Icon;
 use ITplusX\FlexiblePages\Tests\Fixtures\PageTypesConfigurationFixture;
 use PHPUnit\Framework\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use ITplusX\FlexiblePages\Configuration\Validation\ValidationResult;
 
 /**
  * @extensionScannerIgnoreFile
@@ -77,5 +78,40 @@ class IconConfigurationTest extends TestCase
         $this->expectExceptionMessageRegExp('/IconConfiguration/');
 
         new IconConfiguration([]);
+    }
+
+    public function testCustomIdentifierIsPreservedWhenSourceIsProvided()
+    {
+        $iconConfiguration = PageTypesConfigurationFixture::getIconConfigurationByDokTypeAndIconType(
+            111,
+            'rootPageIcon'
+        );
+
+        $icon = GeneralUtility::makeInstance(IconConfiguration::class, $iconConfiguration)->getIcon();
+
+        $this->assertSame('custom-icon-identifier', $icon->getIdentifier());
+    }
+
+    public function testValidateReturnsErrorForIdentifierOnlyConfigWithUnknownIdentifier()
+    {
+        $configuration = ['identifier' => 'non-existing-icon-identifier'];
+
+        $validationResult = IconConfiguration::validate($configuration);
+
+        $this->assertInstanceOf(ValidationResult::class, $validationResult);
+        $this->assertTrue($validationResult->hasErrors());
+    }
+
+    public function testValidateReturnsErrorForCustomConfigWhenIdentifierAlreadyExists()
+    {
+        $configuration = [
+            'identifier' => 'apps-pagetree-page-content-from-page-hideinmenu',
+            'source' => 'EXT:flexible_pages/Tests/Fixtures/Icon-111.png',
+        ];
+
+        $validationResult = IconConfiguration::validate($configuration);
+
+        $this->assertInstanceOf(ValidationResult::class, $validationResult);
+        $this->assertTrue($validationResult->hasErrors());
     }
 }
