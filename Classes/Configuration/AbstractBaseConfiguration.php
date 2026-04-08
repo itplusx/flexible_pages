@@ -22,11 +22,13 @@ abstract class AbstractBaseConfiguration
      */
     public function __construct(array $configuration)
     {
-        $configurationClassName = (new \ReflectionClass(get_called_class()))->getShortName();
+        $validationResult = static::validate($configuration);
 
-        if (static::validate($configuration)->hasErrors()) {
+        if ($validationResult->hasErrors()) {
+            $configurationClassName = (new \ReflectionClass(get_called_class()))->getShortName();
+
             // TODO: This is crappy. Do it better!!!
-            $errorsAsString = implode("\n", static::validate($configuration)->getErrors());
+            $errorsAsString = implode("\n", $validationResult->getErrors());
 
             throw new InvalidConfigurationException("Invalid $configurationClassName.\n" . $errorsAsString);
         }
